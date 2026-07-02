@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+             xmlns:models="clr-namespace:MauiApp2.Models"
+             x:Class="MauiApp2.Views.ProductListPage"
+             x:DataType="vm:ProductListViewModel"
+             Title="{Binding Title}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <Grid
+    Padding="20"
+    RowSpacing="20"
+    BackgroundColor="#F6F8FC"
+    RowDefinitions="Auto,Auto,*">
+
+        <!-- Search -->
+
+        <Border
+        Grid.Row="0"
+        StrokeThickness="0"
+        BackgroundColor="White">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="18"/>
+            </Border.StrokeShape>
+
+            <SearchBar
+            Placeholder="Search products..."
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"
+            BackgroundColor="Transparent"/>
+
+        </Border>
+
+        <!-- Filters -->
+
+        <HorizontalStackLayout
+        Grid.Row="1"
+        Spacing="12">
+
+            <Button
+            Text="Name"
+            Command="{Binding SortByNameCommand}"
+            BackgroundColor="#EEF2FF"
+            TextColor="#5B4DFF"
+            CornerRadius="18"
+            Padding="20,8"/>
+
+            <Button
+            Text="Price"
+            Command="{Binding SortByPriceCommand}"
+            BackgroundColor="#EEF2FF"
+            TextColor="#5B4DFF"
+            CornerRadius="18"
+            Padding="20,8"/>
+
+        </HorizontalStackLayout>
+
+        <!-- Product List -->
+
+        <RefreshView
+        Grid.Row="2"
+        Command="{Binding LoadProductsCommand}"
+        IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView
+            ItemsSource="{Binding Products}"
+            Margin="0,10,0,90">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate x:DataType="models:Product">
+
+                        <SwipeView>
+
+                            <SwipeView.RightItems>
+
+                                <SwipeItems>
+
+                                    <SwipeItem
+                                    Text="Delete"
+                                    BackgroundColor="#EF4444"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductListViewModel}},Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"/>
+
+                                </SwipeItems>
+
+                            </SwipeView.RightItems>
+
+                            <Border
+                            StrokeThickness="0"
+                            BackgroundColor="White"
+                            Padding="18">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="24"/>
+                                </Border.StrokeShape>
+
+                                <Grid
+                                ColumnDefinitions="70,*,Auto">
+
+                                    <!-- Icon -->
+
+                                    <Frame
+                                    WidthRequest="60"
+                                    HeightRequest="60"
+                                    CornerRadius="30"
+                                    Padding="0"
+                                    BackgroundColor="#EEF2FF"
+                                    HasShadow="False">
+
+                                        <Label
+                                        Text="📦"
+                                        FontSize="28"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
+
+                                    </Frame>
+
+                                    <!-- Details -->
+
+                                    <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="4">
+
+                                        <Label
+                                        Text="{Binding Name}"
+                                        FontSize="18"
+                                        FontAttributes="Bold"/>
+
+                                        <Label
+                                        Text="{Binding Category}"
+                                        TextColor="#8A8A8A"/>
+
+                                        <Label
+                                        Text="Product ID"
+                                        FontSize="11"
+                                        TextColor="#B0B0B0"/>
+
+                                        <Label
+                                        Text="{Binding Id}"
+                                        FontSize="13"
+                                        FontAttributes="Bold"/>
+
+                                    </VerticalStackLayout>
+
+                                    <!-- Right -->
+
+                                    <VerticalStackLayout
+                                    Grid.Column="2"
+                                    Spacing="10">
+
+                                        <Border
+                                        Padding="10,6"
+                                        BackgroundColor="#E9FFF1">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="15"/>
+                                            </Border.StrokeShape>
+
+                                            <Label
+                                            Text="{Binding Price,StringFormat='${0:F2}'}"
+                                            FontAttributes="Bold"
+                                            TextColor="#16A34A"/>
+
+                                        </Border>
+
+                                        <Button
+                                        Text="View"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductListViewModel}},Path=ViewDetailsCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#5B4DFF"
+                                        TextColor="White"
+                                        FontSize="12"
+                                        CornerRadius="12"/>
+
+                                    </VerticalStackLayout>
+
+                                </Grid>
+
+                            </Border>
+
+                        </SwipeView>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </RefreshView>
+
+        <!-- Floating Button -->
+
+        <Button
+        Grid.RowSpan="3"
+        Text="+"
+        FontSize="30"
+        WidthRequest="64"
+        HeightRequest="64"
+        CornerRadius="32"
+        BackgroundColor="#5B4DFF"
+        TextColor="White"
+        HorizontalOptions="End"
+        VerticalOptions="End"
+        Margin="0,0,20,20"
+        Shadow="{OnPlatform
+            Android='0,8,20,#40000000',
+            iOS='0,8,20,#40000000'}"
+        Command="{Binding GoToCreateCommand}"/>
+
+    </Grid>
+    
+    <!--<Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
+
+        <SearchBar Grid.Row="0" Placeholder="Search products..." Text="{Binding SearchText}"
+                   SearchCommand="{Binding SearchCommand}" />
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="10">
+            <Button Text="Sort: Name" Command="{Binding SortByNameCommand}" BackgroundColor="#EDE7F6" TextColor="#512BD4" CornerRadius="10" FontSize="12"/>
+            <Button Text="Sort: Price" Command="{Binding SortByPriceCommand}" BackgroundColor="#EDE7F6" TextColor="#512BD4" CornerRadius="10" FontSize="12"/>
+        </HorizontalStackLayout>
+
+        <RefreshView Grid.Row="2" IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadProductsCommand}">
+            <CollectionView ItemsSource="{Binding Products}" EmptyView="No products found. Tap + to add one.">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <Frame Margin="0,4" Padding="14" CornerRadius="14" HasShadow="True" BackgroundColor="White">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                <Frame Grid.Column="0" WidthRequest="50" HeightRequest="50" CornerRadius="25" Padding="0" IsClippedToBounds="True" BackgroundColor="#EDE7F6">
+                                    <Label Text="📦" FontSize="22" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="{Binding Id}" FontAttributes="Bold" FontSize="15"/>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="15"/>
+                                    <Label Text="{Binding Category}" FontSize="12" TextColor="Gray"/>
+                                    <Label Text="{Binding Price, StringFormat='{0:C2}'}" FontSize="13" TextColor="#512BD4"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="2" Spacing="6">
+                                    <Button Text="View" FontSize="11" Padding="10,4" BackgroundColor="#512BD4" TextColor="White" CornerRadius="8"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductListViewModel}}, Path=ViewDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    <Button Text="Delete" FontSize="11" Padding="10,4" BackgroundColor="#FFEBEE" TextColor="Red" CornerRadius="8"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductListViewModel}}, Path=DeleteCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Button Grid.Row="2" Text="+" FontSize="24" WidthRequest="56" HeightRequest="56" CornerRadius="28"
+                BackgroundColor="#512BD4" TextColor="White"
+                HorizontalOptions="End" VerticalOptions="End" Margin="0,0,10,10"
+                Command="{Binding GoToCreateCommand}"/>
+
+    </Grid>-->
+</ContentPage>

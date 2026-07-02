@@ -1,0 +1,42 @@
+using MauiApp2.Services.Interfaces;
+using MauiApp2.Views;
+
+namespace MauiApp2.Services.Implementation;
+
+public class NavigationService : INavigationService
+{
+    public Task NavigateAsync(string route)
+    {
+        return Shell.Current.GoToAsync(route);
+    }
+
+    public Task NavigateAsync(string route, IDictionary<string, object> parameters)
+    {
+        return Shell.Current.GoToAsync(route, parameters);
+    }
+
+    public Task GoBackAsync()
+    {
+        return Shell.Current.GoToAsync("..");
+    }
+
+    public Task NavigateToLogin()
+    {
+        return Shell.Current.GoToAsync(nameof(LoginPage));
+    }
+
+    public Task NavigateToDashboard()
+    {
+        return Shell.Current.GoToAsync(nameof(DashboardPage));
+    }
+
+    public Task NavigateToProductDetails(int productId)
+    {
+        return Shell.Current.GoToAsync(
+            nameof(ProductDetailPage),
+            new Dictionary<string, object>
+            {
+                { "ProductId", productId }
+            });
+    }
+}

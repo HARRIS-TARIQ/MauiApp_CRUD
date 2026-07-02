@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+    x:Class="MauiApp2.Views.ProductEditPage"
+    x:DataType="vm:ProductEditViewModel"
+    BackgroundColor="#F6F8FC"
+    Title="{Binding Title}">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="24">
+
+            <!-- Header -->
+
+            <!-- Image -->
+
+            <Border
+                BackgroundColor="White"
+                StrokeThickness="0"
+                Padding="24">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="18">
+
+                    <Frame
+                        WidthRequest="150"
+                        HeightRequest="150"
+                        CornerRadius="75"
+                        Padding="0"
+                        HasShadow="False"
+                        BackgroundColor="#EEF2FF"
+                        IsClippedToBounds="True">
+
+                        <Image
+                            Source="{Binding ImagePath}"
+                            Aspect="AspectFill"/>
+
+                    </Frame>
+
+                    <Button
+                        Text="📷 Change Image"
+                        Command="{Binding PickImageCommand}"
+                        BackgroundColor="#EEF2FF"
+                        TextColor="#5B4DFF"
+                        CornerRadius="16"
+                        Padding="20,10"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Product Form -->
+
+            <Border
+                BackgroundColor="White"
+                StrokeThickness="0"
+                Padding="20">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="18">
+
+                    <Label
+                        Text="Product Information"
+                        FontSize="20"
+                        FontAttributes="Bold"/>
+
+                    <Entry
+                        Placeholder="Product Name"
+                        Text="{Binding Name}"
+                        ClearButtonVisibility="WhileEditing"/>
+
+                    <Editor
+                        Placeholder="Description"
+                        Text="{Binding Description}"
+                        HeightRequest="120"
+                        AutoSize="TextChanges"/>
+
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="15">
+
+                        <Entry
+                            Grid.Column="0"
+                            Placeholder="Price"
+                            Keyboard="Numeric"
+                            Text="{Binding Price}"/>
+
+                        <Entry
+                            Grid.Column="1"
+                            Placeholder="Quantity"
+                            Keyboard="Numeric"
+                            Text="{Binding Quantity}"/>
+
+                    </Grid>
+
+                    <Entry
+                        Placeholder="Category"
+                        Text="{Binding Category}"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Validation -->
+
+            <Border
+                IsVisible="{Binding HasError}"
+                BackgroundColor="#FFF1F2"
+                Stroke="#FCA5A5"
+                Padding="12">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14"/>
+                </Border.StrokeShape>
+
+                <Label
+                    Text="{Binding ErrorMessage}"
+                    TextColor="#DC2626"
+                    FontSize="13"/>
+
+            </Border>
+
+            <!-- Buttons -->
+
+            <Button
+                Text="Update Product"
+                Command="{Binding SaveCommand}"
+                HeightRequest="56"
+                BackgroundColor="#5B4DFF"
+                TextColor="White"
+                FontAttributes="Bold"
+                FontSize="17"
+                CornerRadius="18"/>
+
+            <Button
+                Text="Cancel"
+                Command="{Binding CancelCommand}"
+                HeightRequest="56"
+                BackgroundColor="White"
+                BorderColor="#D1D5DB"
+                BorderWidth="1"
+                TextColor="#6B7280"
+                CornerRadius="18"/>
+
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                Color="#5B4DFF"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

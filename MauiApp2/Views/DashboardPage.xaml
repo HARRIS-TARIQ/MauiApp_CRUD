@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+    x:Class="MauiApp2.Views.DashboardPage"
+    x:DataType="vm:DashboardViewModel"
+    BackgroundColor="#F6F8FC"
+    Title="{Binding Title}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            EventName="Appearing"
+            Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20" Spacing="25">
+
+            <!-- Header -->
+
+            <Border StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28"/>
+                </Border.StrokeShape>
+
+                <Border.Background>
+
+                    <LinearGradientBrush EndPoint="1,1">
+
+                        <GradientStop Color="#6A5AE0"
+                                      Offset="0"/>
+
+                        <GradientStop Color="#4A36C8"
+                                      Offset="1"/>
+
+                    </LinearGradientBrush>
+
+                </Border.Background>
+
+                <Grid Padding="24">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="Welcome Back 👋"
+                            FontSize="16"
+                            TextColor="#D8D4FF"/>
+
+                        <Label
+                            Text="{Binding CurrentUserName}"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="White"/>
+
+                        <Label
+                            Margin="0,10,0,0"
+                            Text="Manage your inventory with ease."
+                            FontSize="14"
+                            TextColor="#ECEAFF"/>
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+            </Border>
+
+            <!-- Statistics -->
+
+            <Label
+                Text="Overview"
+                FontAttributes="Bold"
+                FontSize="22"
+                Margin="5,0,0,0"/>
+
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="16">
+
+                <!-- Products -->
+
+                <Border
+                    BackgroundColor="White"
+                    Padding="18"
+                    StrokeThickness="0">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout>
+
+                        <Frame
+                            WidthRequest="48"
+                            HeightRequest="48"
+                            CornerRadius="24"
+                            Padding="0"
+                            BackgroundColor="#EEF1FF"
+                            HasShadow="False"
+                            HorizontalOptions="Start">
+
+                            <Label
+                                Text="📦"
+                                FontSize="22"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"/>
+
+                        </Frame>
+
+                        <Label
+                            Margin="0,16,0,0"
+                            Text="Products"
+                            TextColor="#808080"/>
+
+                        <Label
+                            Text="{Binding TotalProducts}"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#222"/>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Value -->
+
+                <Border
+                    Grid.Column="1"
+                    BackgroundColor="White"
+                    Padding="18"
+                    StrokeThickness="0">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout>
+
+                        <Frame
+                            WidthRequest="48"
+                            HeightRequest="48"
+                            CornerRadius="24"
+                            Padding="0"
+                            BackgroundColor="#E8FFF5"
+                            HasShadow="False"
+                            HorizontalOptions="Start">
+
+                            <Label
+                                Text="💰"
+                                FontSize="22"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"/>
+
+                        </Frame>
+
+                        <Label
+                            Margin="0,16,0,0"
+                            Text="Inventory Value"
+                            TextColor="#808080"/>
+
+                        <Label
+                            Text="{Binding TotalInventoryValue,StringFormat='{0:C0}'}"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            TextColor="#16A34A"/>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </Grid>
+
+            <!-- Quick Actions -->
+
+            <Label
+                Text="Quick Actions"
+                FontAttributes="Bold"
+                FontSize="22"/>
+
+            <Border
+                BackgroundColor="White"
+                StrokeThickness="0"
+                Padding="18">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="22"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Button
+                        Text="📦  Manage Products"
+                        Command="{Binding GoToProductsCommand}"
+                        HeightRequest="55"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        BackgroundColor="#5B4DFF"
+                        TextColor="White"
+                        CornerRadius="18"/>
+
+                    <Button
+                        Text="🚪  Logout"
+                        Command="{Binding LogoutCommand}"
+                        HeightRequest="55"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        BackgroundColor="#FFF2F2"
+                        TextColor="#E53935"
+                        BorderColor="#FFD8D8"
+                        BorderWidth="1"
+                        CornerRadius="18"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Busy Indicator -->
+
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                Color="#5B4DFF"
+                HeightRequest="40"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
