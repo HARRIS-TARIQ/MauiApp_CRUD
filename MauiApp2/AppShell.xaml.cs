@@ -13,6 +13,7 @@ namespace MauiApp2
             Routing.RegisterRoute(nameof(ProductCreatePage), typeof(ProductCreatePage));
             Routing.RegisterRoute(nameof(ProductEditPage), typeof(ProductEditPage));
             Routing.RegisterRoute(nameof(ProductDetailPage), typeof(ProductDetailPage));
+            Routing.RegisterRoute(nameof(UiShowcasePage), typeof(UiShowcasePage));
         }
     }
 }

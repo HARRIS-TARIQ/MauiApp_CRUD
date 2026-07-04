@@ -203,6 +203,16 @@
                         CornerRadius="18"/>
 
                     <Button
+                        Text="🎨  UI Components Playground"
+                        Command="{Binding GoToUiShowcaseCommand}"
+                        HeightRequest="55"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        BackgroundColor="#EEF2FF"
+                        TextColor="#5B4DFF"
+                        CornerRadius="18"/>
+
+                    <Button
                         Text="🚪  Logout"
                         Command="{Binding LogoutCommand}"
                         HeightRequest="55"

@@ -49,6 +49,7 @@ namespace MauiApp2
             builder.Services.AddTransient<ProductCreateViewModel>();
             builder.Services.AddTransient<ProductEditViewModel>();
             builder.Services.AddTransient<ProductDetailViewModel>();
+            builder.Services.AddTransient<UiShowcaseViewModel>();
 
             // ---------- Views (Pages) ----------
             builder.Services.AddTransient<LoginPage>();
@@ -57,6 +58,7 @@ namespace MauiApp2
             builder.Services.AddTransient<ProductCreatePage>();
             builder.Services.AddTransient<ProductEditPage>();
             builder.Services.AddTransient<ProductDetailPage>();
+            builder.Services.AddTransient<UiShowcasePage>();
 
 
             //return builder.Build();

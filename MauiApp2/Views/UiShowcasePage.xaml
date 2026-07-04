@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
+             xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+             xmlns:models="clr-namespace:MauiApp2.Models"
+             x:Class="MauiApp2.Views.UiShowcasePage"
+             x:DataType="vm:UiShowcaseViewModel"
+             BackgroundColor="#F6F8FC"
+             Title="{Binding Title}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="24">
+
+            <!-- ============ 1) CARDS (Border + Shadow) ============ -->
+            <Label Text="1. Cards" FontAttributes="Bold" FontSize="20"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+
+                <Border Grid.Column="0" BackgroundColor="White" Padding="18" StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="#20000000" Offset="0,6" Radius="14" Opacity="0.25"/>
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="📦" FontSize="26"/>
+                        <Label Text="Total Products" TextColor="#8A8A8A" FontSize="12"/>
+                        <Label Text="{Binding Products.Count}" FontSize="24" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1" BackgroundColor="White" Padding="18" StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="#20000000" Offset="0,6" Radius="14" Opacity="0.25"/>
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="✅" FontSize="26"/>
+                        <Label Text="Selected" TextColor="#8A8A8A" FontSize="12"/>
+                        <Label Text="{Binding SelectedProduct.Name, TargetNullValue='None'}" FontSize="16" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <!-- ============ 2) ALERTS: Toast + Snackbar ============ -->
+            <Label Text="2. Toast &amp; Snackbar (CommunityToolkit.Maui.Alerts)" FontAttributes="Bold" FontSize="20"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                <Button Grid.Column="0" Text="Show Toast" Command="{Binding ShowToastCommand}"
+                        BackgroundColor="#EEF2FF" TextColor="#5B4DFF" CornerRadius="16" HeightRequest="50"/>
+                <Button Grid.Column="1" Text="Show Snackbar" Command="{Binding ShowSnackbarCommand}"
+                        BackgroundColor="#EEF2FF" TextColor="#5B4DFF" CornerRadius="16" HeightRequest="50"/>
+            </Grid>
+
+            <!-- ============ 3) EXPANDER (toolkit:Expander) ============ -->
+            <Label Text="3. Expander (accordion card)" FontAttributes="Bold" FontSize="20"/>
+
+            <Border BackgroundColor="White" StrokeThickness="0" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+
+                <toolkit:Expander Padding="18">
+                    <toolkit:Expander.Header>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Kesy use karein? (tap to expand)" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="▾" FontSize="18" TextColor="#5B4DFF"/>
+                        </Grid>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="0,12,0,0" Spacing="6">
+                        <Label Text="• Expander header par tap karte hi content show/hide hota hai." FontSize="13" TextColor="#666"/>
+                        <Label Text="• Popup: neeche grid mein koi row select karo, phir 'Open Quick-View Popup' button dabao." FontSize="13" TextColor="#666"/>
+                        <Label Text="• DataGrid columns sort/resize support karte hain." FontSize="13" TextColor="#666"/>
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+            </Border>
+
+            <!-- ============ 4) DATAGRID (Maui.DataGrid community package) ============ -->
+            <Label Text="4. DataGrid (Maui.DataGrid)" FontAttributes="Bold" FontSize="20"/>
+
+            <Border BackgroundColor="White" StrokeThickness="0" Padding="4" HeightRequest="320">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+
+                <dg:DataGrid
+                    ItemsSource="{Binding Products}"
+                    SelectedItem="{Binding SelectedProduct}"
+                    SelectionMode="Single"
+                    HeaderHeight="44"
+                    RowHeight="46"
+                    BorderColor="#EEF2FF"
+                    HeaderBackground="#EEF2FF"
+                    ActiveRowColor="#F3F0FF">
+
+                    <dg:DataGrid.Columns>
+                        <dg:DataGridColumn Title="ID" PropertyName="Id" Width="0.6*"/>
+                        <dg:DataGridColumn Title="Name" PropertyName="Name" Width="1.8*"/>
+                        <dg:DataGridColumn Title="Category" PropertyName="Category" Width="1.4*"/>
+                        <dg:DataGridColumn Title="Price" PropertyName="Price" Width="1*" StringFormat="{}{0:C2}"/>
+                        <dg:DataGridColumn Title="Qty" PropertyName="Quantity" Width="0.8*"/>
+                    </dg:DataGrid.Columns>
+
+                </dg:DataGrid>
+
+            </Border>
+
+            <Button
+                Text="Open Quick-View Popup for Selected Row"
+                Clicked="OnOpenQuickViewClicked"
+                IsEnabled="{Binding SelectedProduct, Converter={StaticResource IsNotNullConverter}}"
+                BackgroundColor="#5B4DFF"
+                TextColor="White"
+                CornerRadius="16"
+                HeightRequest="52"/>
+
+            <Label
+                Text="{Binding LastPopupResult}"
+                FontSize="12"
+                TextColor="#8A8A8A"
+                HorizontalTextAlignment="Center"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#5B4DFF"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

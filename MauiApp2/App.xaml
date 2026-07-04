@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiApp2"
-    xmlns:converter="clr-namespace:MauiApp2.Helpers">
+    xmlns:converter="clr-namespace:MauiApp2.Helpers"
+    xmlns:tkConverter="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -17,6 +18,9 @@
 
             <!-- Global Converters -->
             <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+
+            <!-- mauiUI branch: CommunityToolkit.Maui ready-made converters -->
+            <tkConverter:IsNotNullConverter x:Key="IsNotNullConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

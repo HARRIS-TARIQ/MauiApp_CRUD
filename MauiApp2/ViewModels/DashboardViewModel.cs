@@ -64,6 +64,12 @@ namespace MauiApp2.ViewModels
         }
 
         [RelayCommand]
+        private async Task GoToUiShowcaseAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(UiShowcasePage));
+        }
+
+        [RelayCommand]
         private async Task LogoutAsync()
         {
             await _authService.LogoutAsync();
