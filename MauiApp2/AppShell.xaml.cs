@@ -42,6 +42,10 @@ namespace MauiApp2
         {
             InitializeComponent();
 
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(DashboardPage), typeof(DashboardPage));
+            Routing.RegisterRoute(nameof(ProductListPage), typeof(ProductListPage));
+
             // Register only pages that are NOT declared in AppShell.xaml
 
             Routing.RegisterRoute(nameof(ProductCreatePage), typeof(ProductCreatePage));
