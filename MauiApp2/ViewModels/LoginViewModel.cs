@@ -11,6 +11,9 @@ namespace MauiApp2.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IDialogService _dialogService;
 
+        private bool _hasAppeared;
+        private bool _isNavigating;
+
         public LoginViewModel(
             IAuthenticationService authService,
             INavigationService navigationService,
@@ -19,8 +22,11 @@ namespace MauiApp2.ViewModels
             _authService = authService;
             _navigationService = navigationService;
             _dialogService = dialogService;
+
             Title = "Login";
         }
+
+        #region Properties
 
         [ObservableProperty]
         private string email = string.Empty;
@@ -34,6 +40,10 @@ namespace MauiApp2.ViewModels
         [ObservableProperty]
         private bool isPasswordVisible;
 
+        #endregion
+
+        #region Commands
+
         [RelayCommand]
         private void TogglePasswordVisibility()
         {
@@ -46,9 +56,12 @@ namespace MauiApp2.ViewModels
             SetError("Password recovery is not configured in this demo build.");
         }
 
-        [RelayCommand]
+        [RelayCommand(AllowConcurrentExecutions = false)]
         private async Task LoginAsync()
         {
+            if (IsBusy || _isNavigating)
+                return;
+
             ClearError();
 
             if (!Validators.IsValidEmail(Email))
@@ -66,13 +79,19 @@ namespace MauiApp2.ViewModels
             try
             {
                 IsBusy = true;
-                var success = await _authService.LoginAsync(Email, Password, RememberMe);
+
+                var success = await _authService.LoginAsync(
+                    Email,
+                    Password,
+                    RememberMe);
 
                 if (!success)
                 {
                     SetError(Constants.Messages.LoginFailed);
                     return;
                 }
+
+                _isNavigating = true;
 
                 await _navigationService.NavigateToDashboard();
             }
@@ -86,11 +105,14 @@ namespace MauiApp2.ViewModels
             }
         }
 
-        [RelayCommand]
+        [RelayCommand(AllowConcurrentExecutions = false)]
         private async Task AppearingAsync()
         {
-            if (IsBusy)
+            // Prevent Appearing from executing more than once.
+            if (_hasAppeared || _isNavigating)
                 return;
+
+            _hasAppeared = true;
 
             try
             {
@@ -98,6 +120,8 @@ namespace MauiApp2.ViewModels
 
                 if (await _authService.IsUserLoggedInAsync())
                 {
+                    _isNavigating = true;
+
                     await _navigationService.NavigateToDashboard();
                 }
             }
@@ -110,5 +134,7 @@ namespace MauiApp2.ViewModels
                 IsBusy = false;
             }
         }
+
+        #endregion
     }
 }
