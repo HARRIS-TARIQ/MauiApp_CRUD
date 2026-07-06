@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.DeviceDetailsPage"
+             Title="Device Details"
+             BackgroundColor="#F5F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="EVC-1001" FontSize="24" FontAttributes="Bold" TextColor="#17203F" />
+                    <Label Text="Operational status, current configuration, and recent events." TextColor="#6B7280" />
+                </VerticalStackLayout>
+            </Border>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border BackgroundColor="#EEF2FF" Padding="16" StrokeThickness="0" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout>
+                        <Label Text="Firmware" FontAttributes="Bold" />
+                        <Label Text="v2.4.1" TextColor="#4F46E5" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border BackgroundColor="#ECFDF5" Padding="16" StrokeThickness="0" StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout>
+                        <Label Text="Signal" FontAttributes="Bold" />
+                        <Label Text="98%" TextColor="#16A34A" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+            <Border BackgroundColor="White" Padding="20" StrokeThickness="0" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Last Events" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="• Sensor recalibration completed" />
+                    <Label Text="• Report generated successfully" />
+                    <Label Text="• Backup completed" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

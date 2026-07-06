@@ -64,6 +64,30 @@ namespace MauiApp2.ViewModels
         }
 
         [RelayCommand]
+        private async Task GoToDevicesAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(DeviceListPage));
+        }
+
+        [RelayCommand]
+        private async Task GoToMonitoringAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(LiveMonitoringPage));
+        }
+
+        [RelayCommand]
+        private async Task GoToReportsAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(ReportsPage));
+        }
+
+        [RelayCommand]
+        private async Task GoToSettingsAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(SettingsPage));
+        }
+
+        [RelayCommand]
         private async Task LogoutAsync()
         {
             await _authService.LogoutAsync();

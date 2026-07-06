@@ -8,16 +8,12 @@
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
-        <Style x:Key="EntryStyle" TargetType="Entry">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="TextColor" Value="#222" />
-            <Setter Property="BackgroundColor" Value="Transparent" />
-        </Style>
-        <Style x:Key="IconLabel" TargetType="Label">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="TextColor" Value="#6B6B6B" />
-            <Setter Property="Margin" Value="0,0,8,0" />
+        <Style x:Key="FieldBorderStyle" TargetType="Border">
+            <Setter Property="Stroke" Value="#E5E7EB" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+            <Setter Property="BackgroundColor" Value="#F8FAFC" />
         </Style>
     </ContentPage.Resources>
 
@@ -27,82 +23,72 @@
 
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="#6A4BFF" Offset="0" />
-                <GradientStop Color="#512BD4" Offset="1" />
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#5B4DFF" Offset="0" />
+                <GradientStop Color="#2B3C96" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
 
         <ScrollView>
-            <Grid Padding="24" RowDefinitions="Auto,Auto,Auto" VerticalOptions="Center">
-                <VerticalStackLayout Spacing="6" HorizontalOptions="Center" Grid.Row="0">
-                    <Frame WidthRequest="84" HeightRequest="84" CornerRadius="42" BackgroundColor="White" HasShadow="False" Padding="12" HorizontalOptions="Center">
-                        <Label Text="MA" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" TextColor="#512BD4" />
-                    </Frame>
-                    <Label Text="Welcome Back" FontSize="26" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
-                    <Label Text="Sign in to continue" FontSize="14" TextColor="White" Opacity="0.9" HorizontalOptions="Center" />
-                </VerticalStackLayout>
+            <Grid Padding="24" VerticalOptions="Center">
+                <Border BackgroundColor="White" StrokeThickness="0" Padding="28" MaximumWidthRequest="460" HorizontalOptions="Center" VerticalOptions="Center" StrokeShape="RoundRectangle 28">
+                    <VerticalStackLayout Spacing="18">
+                        <Border BackgroundColor="#EEF2FF" WidthRequest="72" HeightRequest="72" StrokeThickness="0" StrokeShape="RoundRectangle 24" HorizontalOptions="Center">
+                            <Label Text="MA" FontSize="24" FontAttributes="Bold" TextColor="#4F46E5" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
 
-                <Frame Grid.Row="1" Margin="0,18,0,0" CornerRadius="20" Padding="20" BackgroundColor="White" HasShadow="True">
-                    <Grid RowDefinitions="Auto,8,Auto,8,Auto,8,Auto" ColumnDefinitions="*">
+                        <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                            <Label Text="Secure Access" FontSize="24" FontAttributes="Bold" TextColor="#111827" />
+                            <Label Text="Sign in to your operations console" FontSize="13" TextColor="#6B7280" />
+                        </VerticalStackLayout>
 
-                        <!-- Email -->
-                        <Grid Row="0" ColumnDefinitions="Auto,*">
-                            <Label Text="📧" Style="{StaticResource IconLabel}" />
-                            <Entry Grid.Column="1" Placeholder="Email" Text="{Binding Email}" Keyboard="Email" Style="{StaticResource EntryStyle}" />
-                        </Grid>
+                        <VerticalStackLayout Spacing="12">
+                            <Border Style="{StaticResource FieldBorderStyle}">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                    <Label Text="✉" FontSize="16" VerticalOptions="Center" TextColor="#6B7280" />
+                                    <Entry Grid.Column="1" Placeholder="Email" Text="{Binding Email}" Keyboard="Email" BackgroundColor="Transparent" />
+                                </Grid>
+                            </Border>
 
-                        <BoxView Grid.Row="1" HeightRequest="1" Color="#F0F0F0" />
+                            <Border Style="{StaticResource FieldBorderStyle}">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                    <Label Text="🔒" FontSize="16" VerticalOptions="Center" TextColor="#6B7280" />
+                                    <Entry Grid.Column="1" Placeholder="Password" Text="{Binding Password}" IsPassword="{Binding IsPasswordVisible, Converter={StaticResource InverseBoolConverter}}" BackgroundColor="Transparent" />
+                                    <Button Grid.Column="2" Text="👁" BackgroundColor="Transparent" TextColor="#6B7280" Command="{Binding TogglePasswordVisibilityCommand}" WidthRequest="36" HeightRequest="36" />
+                                </Grid>
+                            </Border>
 
-                        <!-- Password -->
-                        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
-                            <Label Text="🔒" Style="{StaticResource IconLabel}" />
-                            <Entry Grid.Column="1" Placeholder="Password" Text="{Binding Password}" IsPassword="{Binding IsPasswordVisible, Converter={StaticResource InverseBoolConverter}}" Style="{StaticResource EntryStyle}" />
-                            <Button Grid.Column="2" Text="👁" BackgroundColor="Transparent" TextColor="#6B6B6B" Command="{Binding TogglePasswordVisibilityCommand}" WidthRequest="36" HeightRequest="36" />
-                        </Grid>
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                    <CheckBox IsChecked="{Binding RememberMe}" />
+                                    <Label Text="Remember me" VerticalOptions="Center" TextColor="#6B7280" />
+                                </HorizontalStackLayout>
+                                <Button Grid.Column="2" Text="Forgot?" BackgroundColor="Transparent" TextColor="#4F46E5" Command="{Binding ForgotPasswordCommand}" />
+                            </Grid>
 
-                        <BoxView Grid.Row="3" HeightRequest="1" Color="#F0F0F0" />
+                            <Label Text="{Binding ErrorMessage}" TextColor="#D9534F" IsVisible="{Binding HasError}" FontSize="12" />
 
-                        <!-- Remember / Forgot -->
-                        <Grid Grid.Row="4" ColumnDefinitions="Auto,Auto,*">
-                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                                <CheckBox IsChecked="{Binding RememberMe}" />
-                                <Label Text="Remember me" VerticalOptions="Center" TextColor="#6B6B6B" />
-                            </HorizontalStackLayout>
-                            <Button Grid.Column="1" Text="Forgot?" BackgroundColor="Transparent" TextColor="#512BD4" HorizontalOptions="End" Command="{Binding ForgotPasswordCommand}" />
-                        </Grid>
+                            <Button Text="Sign In" Command="{Binding LoginCommand}" HeightRequest="48" CornerRadius="14" FontAttributes="Bold" TextColor="White">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#6A4BFF" Offset="0" />
+                                        <GradientStop Color="#4F46E5" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <Button.IsEnabled>
+                                    <Binding Path="IsBusy" Converter="{StaticResource InverseBoolConverter}" />
+                                </Button.IsEnabled>
+                            </Button>
+                        </VerticalStackLayout>
 
-                        <Label Grid.Row="5" Text="{Binding ErrorMessage}" TextColor="#D9534F" IsVisible="{Binding HasError}" FontSize="12" />
-
-                        <!-- Login Button -->
-                        <Button Grid.Row="6" Text="Sign In" Command="{Binding LoginCommand}" HeightRequest="48" CornerRadius="12" TextColor="White">
-                            <Button.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="#6A4BFF" Offset="0" />
-                                    <GradientStop Color="#512BD4" Offset="1" />
-                                </LinearGradientBrush>
-                            </Button.Background>
-                            <Button.IsEnabled>
-                                <Binding Path="IsBusy" Converter="{StaticResource InverseBoolConverter}" />
-                            </Button.IsEnabled>
-                        </Button>
-
-                    </Grid>
-                </Frame>
-
-                <!-- Social / Demo -->
-                <VerticalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center" Margin="0,12,0,0">
-
-                    <Label Text="Demo: admin@devzologics.com / Admin@123" FontSize="11" TextColor="#EDEDED" HorizontalOptions="Center" />
-                </VerticalStackLayout>
-
+                        <Label Text="Demo: admin@devzologics.com / Admin@123" FontSize="11" TextColor="#9CA3AF" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
             </Grid>
         </ScrollView>
 
-        <!-- Busy overlay -->
         <Grid IsVisible="{Binding IsBusy}" BackgroundColor="#80000000">
             <ActivityIndicator IsRunning="{Binding IsBusy}" Color="White" WidthRequest="48" HeightRequest="48" HorizontalOptions="Center" VerticalOptions="Center" />
         </Grid>
-
     </Grid>
 </ContentPage>

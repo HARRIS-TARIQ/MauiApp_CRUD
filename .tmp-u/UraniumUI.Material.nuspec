@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>UraniumUI.Material</id>
+    <version>3.0.0</version>
+    <authors>enisn</authors>
+    <icon>logo_128.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/enisn/UraniumUI</projectUrl>
+    <description>UraniumUI is a Free &amp; Open-Source presentation framework for .NET MAUI.</description>
+    <releaseNotes>Check GitHub releases for changelog.</releaseNotes>
+    <repository type="git" url="https://github.com/enisn/UraniumUI" branch="refs/heads/develop" commit="cb1fba84a45342b5ee61b50cef7ff02bbaaac4bd" />
+    <dependencies>
+      <group targetFramework="net10.0">
+        <dependency id="UraniumUI" version="3.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net10.0-android36.0">
+        <dependency id="UraniumUI" version="3.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net10.0-ios26.0">
+        <dependency id="UraniumUI" version="3.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net10.0-maccatalyst26.0">
+        <dependency id="UraniumUI" version="3.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net10.0-windows10.0.19041">
+        <dependency id="UraniumUI" version="3.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

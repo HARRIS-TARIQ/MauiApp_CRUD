@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.LiveMonitoringPage"
+             Title="Live Monitoring"
+             BackgroundColor="#F5F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Live Device Monitoring" FontSize="24" FontAttributes="Bold" TextColor="#17203F" />
+                    <Label Text="Watch stream health, current metrics, and alarms in real time." TextColor="#6B7280" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StrokeThickness="0" BackgroundColor="#0F172A" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Telemetry Overview" FontSize="18" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Throughput: 240 Mbps" TextColor="#E2E8F0" />
+                    <Label Text="Latency: 18 ms" TextColor="#E2E8F0" />
+                    <Label Text="Packet loss: 0.02%" TextColor="#E2E8F0" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

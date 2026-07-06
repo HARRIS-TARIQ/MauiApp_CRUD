@@ -7,6 +7,8 @@ using MauiApp2.Services.Interfaces;
 using MauiApp2.ViewModels;
 using MauiApp2.Views;
 using Microsoft.Extensions.Logging;
+using UraniumUI;
+using UraniumUI.Material;
 
 namespace MauiApp2
 {
@@ -18,6 +20,8 @@ namespace MauiApp2
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -57,6 +61,20 @@ namespace MauiApp2
             builder.Services.AddTransient<ProductCreatePage>();
             builder.Services.AddTransient<ProductEditPage>();
             builder.Services.AddTransient<ProductDetailPage>();
+            builder.Services.AddTransient<DeviceListPage>();
+            builder.Services.AddTransient<DeviceDetailsPage>();
+            builder.Services.AddTransient<LiveMonitoringPage>();
+            builder.Services.AddTransient<DeviceConfigurationPage>();
+            builder.Services.AddTransient<DeviceDiagnosticsPage>();
+            builder.Services.AddTransient<ReportsPage>();
+            builder.Services.AddTransient<ReportDetailsPage>();
+            builder.Services.AddTransient<DataExportPage>();
+            builder.Services.AddTransient<UserManagementPage>();
+            builder.Services.AddTransient<UserProfilePage>();
+            builder.Services.AddTransient<SettingsPage>();
+            builder.Services.AddTransient<NotificationsPage>();
+            builder.Services.AddTransient<AboutPage>();
+            builder.Services.AddTransient<HelpPage>();
 
 
             //return builder.Build();

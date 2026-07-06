@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.DeviceConfigurationPage"
+             Title="Device Configuration"
+             BackgroundColor="#F5F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Configuration" FontSize="24" FontAttributes="Bold" TextColor="#17203F" />
+                    <Label Text="Adjust device profiles, thresholds, and service behavior." TextColor="#6B7280" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Profile Settings" FontSize="18" FontAttributes="Bold" />
+                    <Entry Placeholder="Profile name" />
+                    <Entry Placeholder="Sampling interval" />
+                    <CheckBox />
+                    <Label Text="Auto-restart service" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

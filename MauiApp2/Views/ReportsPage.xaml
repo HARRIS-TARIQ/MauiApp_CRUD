@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.ReportsPage"
+             Title="Reports"
+             BackgroundColor="#F5F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Reports" FontSize="24" FontAttributes="Bold" TextColor="#17203F" />
+                    <Label Text="Review operational and system reports for the current period." TextColor="#6B7280" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Available Reports" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="• Daily device activity" />
+                    <Label Text="• Weekly compliance summary" />
+                    <Label Text="• Monthly export ledger" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -41,6 +41,12 @@ namespace MauiApp2.ViewModels
         }
 
         [RelayCommand]
+        private void ForgotPassword()
+        {
+            SetError("Password recovery is not configured in this demo build.");
+        }
+
+        [RelayCommand]
         private async Task LoginAsync()
         {
             ClearError();

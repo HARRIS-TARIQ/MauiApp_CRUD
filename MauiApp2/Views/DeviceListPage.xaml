@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.DeviceListPage"
+             Title="Device List"
+             BackgroundColor="#F5F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Device Inventory" FontSize="24" FontAttributes="Bold" TextColor="#17203F" />
+                    <Label Text="Review connected devices, their health status, and latest activity." TextColor="#6B7280" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Connected Devices" FontSize="18" FontAttributes="Bold" TextColor="#17203F" />
+                    <Border BackgroundColor="#EEF2FF" Padding="14" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="EVC-1001" FontAttributes="Bold" />
+                                <Label Text="Online • Last sync 2 min ago" TextColor="#6B7280" />
+                            </VerticalStackLayout>
+                            <Label Text="Healthy" TextColor="#16A34A" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                    <Border BackgroundColor="#F9FAFB" Padding="14" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="EVC-1002" FontAttributes="Bold" />
+                                <Label Text="Needs attention • Battery 22%" TextColor="#6B7280" />
+                            </VerticalStackLayout>
+                            <Label Text="Alert" TextColor="#D97706" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

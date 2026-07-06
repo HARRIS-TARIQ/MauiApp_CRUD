@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.UserManagementPage"
+             Title="User Management"
+             BackgroundColor="#F5F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="User Management" FontSize="24" FontAttributes="Bold" TextColor="#17203F" />
+                    <Label Text="Manage operators, roles, and access permissions." TextColor="#6B7280" />
+                </VerticalStackLayout>
+            </Border>
+            <Border StrokeThickness="0" BackgroundColor="White" Padding="20" StrokeShape="RoundRectangle 24">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Administrators" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="• Maya Chen • Supervisor" />
+                    <Label Text="• Daniel Cruz • Technician" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

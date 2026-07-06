@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UraniumUI.Material</name>
+    </assembly>
+    <members>
+        <member name="M:UraniumUI.Material.Controls.InputField.CreateClearIconPath(System.String)">
+            <summary>
+            Creates the X-shaped clear icon Path used by the built-in clear attachments.
+            The fill is wired through an AppTheme binding so it follows runtime light/dark
+            theme switches instead of being captured once at creation time. Shape.Fill is a
+            Brush-typed property, so SolidColorBrush instances are provided per theme.
+            </summary>
+        </member>
+        <member name="F:UraniumUI.Material.Controls.TabViewCachingStrategy.CacheOnCodeBehind">
+            <summary>
+            The view is removed from the visual tree when a tab is deselected. But instance is kept in memory. And same instance is used when tab is selected again.
+            </summary>
+        </member>
+        <member name="F:UraniumUI.Material.Controls.TabViewCachingStrategy.CacheOnLayout">
+            <summary>
+            The view is kept in the visual tree and visibility is toggled when a tab is selected.
+            </summary>
+        </member>
+        <member name="F:UraniumUI.Material.Controls.TabViewCachingStrategy.RecreateAlways">
+            <summary>
+            No caching. View is removed from the visual tree and a new instance is created when a tab is selected.
+            </summary>
+        </member>
+        <member name="M:UraniumUI.Material.Controls.TextField.SelectAllText">
+            <summary>
+            Input has be be already focused when this method is called.
+            </summary>
+        </member>
+        <member name="T:UraniumUI.Material.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+    </members>
+</doc>

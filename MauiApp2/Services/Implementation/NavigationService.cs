@@ -22,12 +22,12 @@ public class NavigationService : INavigationService
 
     public Task NavigateToLogin()
     {
-        return Shell.Current.GoToAsync(nameof(LoginPage));
+        return Shell.Current.GoToAsync("//LoginPage");
     }
 
     public Task NavigateToDashboard()
     {
-        return Shell.Current.GoToAsync(nameof(DashboardPage));
+        return Shell.Current.GoToAsync("//DashboardPage");
     }
 
     public Task NavigateToProductDetails(int productId)
